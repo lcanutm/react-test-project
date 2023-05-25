@@ -21,6 +21,7 @@ export const Index = ({ user }: UserDataProps) => {
 
         <StartArea
           repos={user.repos}
+          reposDescription={user.reposDescription}
           followers={user.followers}
           following={user.following}
         />

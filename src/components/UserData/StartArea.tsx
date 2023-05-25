@@ -2,28 +2,49 @@ import styled from "styled-components";
 
 interface StastsAreaProps {
   repos: string;
+  reposDescription: [];
   followers: string;
   following: string;
 }
 
-export const StartArea = ({ repos, followers, following }: StastsAreaProps) => {
+export const StartArea = ({
+  repos,
+  reposDescription,
+  followers,
+  following,
+}: StastsAreaProps) => {
   return (
-    <Container>
-      <Data>
-        <span>Repos</span>
-        <strong>{repos}</strong>
-      </Data>
+    <>
+      <Container>
+        <Data>
+          <span>Repos</span>
+          <strong>{repos}</strong>
+        </Data>
 
-      <Data>
-        <span>Followers</span>
-        <strong>{followers}</strong>
-      </Data>
+        <Data>
+          <span>Followers</span>
+          <strong>{followers}</strong>
+        </Data>
 
-      <Data>
-        <span>Following</span>
-        <strong>{following}</strong>
-      </Data>
-    </Container>
+        <Data>
+          <span>Following</span>
+          <strong>{following}</strong>
+        </Data>
+      </Container>
+      <ContainerRepos>
+        {reposDescription &&
+          reposDescription.map((value, index) => {
+            console.log(value);
+            const { name, description } = value;
+            return (
+              <Data>
+                <strong>{name}</strong>
+                <span>{description}</span>
+              </Data>
+            );
+          })}
+      </ContainerRepos>
+    </>
   );
 };
 
@@ -35,10 +56,24 @@ const Container = styled.div`
   justify-content: space-between;
   background: ${(props) => props.theme.colors.background};
   padding: 1.8rem 1.4rem;
-
+  margin: 2rem;
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    padding: 1.8rem 3.2rem;
+  }
+`;
+const ContainerRepos = styled.div`
+  border-radius: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: ${(props) => props.theme.colors.background};
+  padding: 1.8rem 1.4rem;
+  margin: 2rem;
+  @media (min-width: 768px) {
+    display: grid;
     padding: 1.8rem 3.2rem;
   }
 `;
@@ -48,7 +83,7 @@ const Data = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  height: 5rem;
   @media (min-width: 768px) {
     align-items: flex-start;
   }
@@ -70,7 +105,7 @@ const Data = styled.li`
     line-height: 2.4rem;
     margin-top: 0.8rem;
 
-    color: ${(props) => props.theme.colors.textBolded};
+    color: ${(props) => props.theme.colors.textNorm};
 
     @media (min-width: 768px) {
       margin-top: 1rem;

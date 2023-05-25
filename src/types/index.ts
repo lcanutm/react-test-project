@@ -5,6 +5,7 @@ export interface UserProps {
   username: string;
   bio: string;
   repos: string;
+  reposDescription: [];
   followers: string;
   following: string;
   links: {
