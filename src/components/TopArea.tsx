@@ -34,13 +34,11 @@ export const TopArea = ({ setUser }: TopAreaProps) => {
       setUser(null);
       return;
     }
+    setNotFound(false);
 
-    const res = await fetch(
-      `https://api.github.com/search/repositories?q=${username}`
-    );
+    const res = await fetch(`https://api.github.com/users/${username}/repos`);
     const repo = await res.json();
     console.log("repositorios", repo);
-    setNotFound(false);
 
     const user: UserProps = {
       pfp: data.avatar_url,
@@ -49,6 +47,7 @@ export const TopArea = ({ setUser }: TopAreaProps) => {
       username: data.login,
       bio: data.bio,
       repos: data.public_repos,
+      reposDescription: repo ? repo : [],
       followers: data.followers,
       following: data.following,
       links: {
